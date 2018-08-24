@@ -1,0 +1,27 @@
+package com.connections;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class DemoTransaction {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub = con
+		try {
+			Connection con=  MyConnection.getMyConnection();
+		//	System.out.println("connection successful");
+			Statement st = con.createStatement();
+			st.executeUpdate("insert into emp values(91,'City',100000)");
+			st.executeUpdate("insert into emp values(92,'City',100000)");
+			st.executeUpdate("insert into emp values(16,'City',100000)");
+			st.executeUpdate("insert into emp values(93,'City',100000)");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+}

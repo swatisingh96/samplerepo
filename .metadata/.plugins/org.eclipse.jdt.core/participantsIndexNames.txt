@@ -1,0 +1,9 @@
+INDEX VERSION 1.131
+C:\Users\Grad57\eclipse-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1337287981.index
+\JSPAction\src
+C:\Users\Grad57\eclipse-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\45125702.index
+\MyApp\src
+C:\Users\Grad57\eclipse-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1287559913.index
+\JSTL Demo\src
+C:\Users\Grad57\eclipse-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2326561339.index
+\SessionManagment\src

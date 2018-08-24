@@ -1,0 +1,56 @@
+package com.connections;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.pojos.Employee;
+
+public class EmployeeDAO {
+	public int addEmployee(Employee emp) {
+		String INSERT_EMPLOYEE= "insert into EMP values(?,?,?)";
+		int r=0;
+		try {
+			PreparedStatement ps= MyConnection.getMyConnection().prepareStatement(INSERT_EMPLOYEE);
+			ps.setInt(1, emp.getEmpId());
+			ps.setString(2, emp.getName());
+			ps.setInt(3,emp.getSalary());
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return r;
+	}
+	public List<Employee> finAllEmployees(){
+		List<Employee> employees= new ArrayList<>();
+		Connection con =MyConnection.getMyConnection();
+		try {
+			String FIND_ALL_EMPLOYEES = "SELECT * FROM EMP";
+			Statement  st = con.createStatement();
+			
+			ResultSet set =st.executeQuery(FIND_ALL_EMPLOYEES);
+			
+			while(set.next()) {
+				
+				int empID =  set.getInt(1);
+				String name= set.getString(2);
+				int salary= set.getInt(3);
+				//System.out.println("id:-"+empID+" "+"name:-"+name+" "+"salary:-"+salary);
+				Employee emp = new Employee(empID,salary,name);
+				employees.add(emp);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		return employees;
+	}
+}

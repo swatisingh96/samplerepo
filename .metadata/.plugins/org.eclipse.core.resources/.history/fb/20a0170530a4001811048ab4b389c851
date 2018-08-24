@@ -1,0 +1,27 @@
+package com.dao;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.List;
+
+import com.connections.MyConnection;
+
+public class EmployeeDAO {
+	public List<Employee> findAllEmployees{
+		Connection con = MyConnection.getMyConnection();
+		String select_all = "select * from emp";
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(select_all);
+			while(rs.next()){
+				Employee employee = new Employee();
+				
+				employee.setEmpId(rs.getInt(1));
+				
+				
+			}
+		}
+	}
+
+}

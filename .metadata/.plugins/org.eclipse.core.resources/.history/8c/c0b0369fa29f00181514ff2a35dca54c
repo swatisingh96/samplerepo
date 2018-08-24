@@ -1,0 +1,73 @@
+package com.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+
+import com.beans.Book;
+import com.connections.MyConnection;
+
+public class BookDAOImpl implements BookDAO {
+
+	@Override
+	public boolean addBook(Book book) {
+		// TODO Auto-generated method stub
+		Connection con = MyConnection.getMyConnection();
+		String NEW_BOOK ="INSERT INTO BOOK VALUES('ISBN1','NAME1','PUBLICATION1','AUTHOR1')";
+		int rows=0;
+		try {
+			Statement st = con.createStatement();
+			rows =st.executeUpdate(NEW_BOOK);
+			System.out.println("no. of books added:-"+rows);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(rows>0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public int updateBook(Book book, String ISBN) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteBook() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Book findBookByISBN(String ISBN) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Book> findBooksByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Book> findAllBooks() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Book> findBooksByAuthor(String auth_name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

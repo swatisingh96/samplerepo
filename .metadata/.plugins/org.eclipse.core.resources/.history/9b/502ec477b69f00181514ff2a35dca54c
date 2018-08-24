@@ -1,0 +1,121 @@
+package com.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+
+import com.beans.Book;
+import com.dao.*;
+
+public class BookDAOImpl implements BookDAO {
+
+	@Override
+	public boolean addBook(Book book) {
+		// TODO Auto-generated method stub
+		Connection con = MyConnection.getMyConnection();
+		String NEW_BOOK ="INSERT INTO BOOK VALUES(?,?,?,?)";
+		int rows=0;
+		try {
+			PreparedStatement ps = con.prepareStatement(NEW_BOOK);
+			ps.setString(1, book.getIsbn());
+			ps.setString(2, book.getName());
+			ps.setString(3, book.getPublication());
+			ps.setString(4, book.getAuthor());
+						
+			rows =ps.executeUpdate();
+			System.out.println("no. of books added:-"+rows);
+			
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(rows>0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public int updateBook(Book book, String ISBN) {
+		// TODO Auto-generated method stub
+		Connection con = MyConnection.getMyConnection();
+		String NEW_BOOK ="UPDATE BOOK SET NAME=?,PUBLICATION=?,AUTHOR=? WHERE ISBN =?";
+		int rows=0;
+		try {
+			PreparedStatement ps = con.prepareStatement(NEW_BOOK);
+			
+			ps.setString(1, book.getName());
+			ps.setString(2, book.getPublication());
+			ps.setString(3, book.getAuthor());
+			ps.setString(4, ISBN);
+						
+			rows =ps.executeUpdate();
+			System.out.println("book data updated by isbn:-"+rows);
+			System.out.println("book field updated");
+			//System.out.println("isbn:-"+isbn+"\tname:"+name+"\tpublication:"+publication+"\tauthor:"+author);
+			
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	@Override
+	public int deleteBook() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Book findBookByISBN(String ISBN) {
+		// TODO Auto-generated method stub
+		Connection con = MyConnection.getMyConnection();
+		String FIND_BOOK_BY_ISBN ="SELECT * FROM BOOK WHERE ISBN=?";
+
+		Book b= null;
+		try {
+			PreparedStatement ps = con.prepareStatement(FIND_BOOK_BY_ISBN);
+			ps.setString(1, ISBN);
+			ResultSet set= ps.executeQuery();				
+			b = new Book(set.getString("ISBN"), set.getString("NAME"), set.getString("PUBLICATION"),set.getString("AUTHOR"));
+			while(set.next()) {//System.out.println("isbn:-"+isbn+"\tname:"+name+"\tpublication:"+publication+"\tauthor:"+author);
+			System.out.println("isbn:"+set.getString("isbn")+"name:"+set.getString("name")+"publication:"+set.getString("publication")+"author:"+set.getString("author"));
+		}}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return b;
+	
+	}
+
+	@Override
+	public List<Book> findBooksByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Book> findAllBooks() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Book> findBooksByAuthor(String auth_name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

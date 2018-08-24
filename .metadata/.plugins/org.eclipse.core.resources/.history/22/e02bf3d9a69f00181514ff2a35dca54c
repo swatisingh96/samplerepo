@@ -1,0 +1,32 @@
+package com.dao;
+
+import java.util.Scanner;
+
+import com.beans.Book;
+
+public class TestBookDAOImpl {
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		System.out.println("enter isbn");
+		String isbn=s.next();
+		System.out.println("enter name");
+		String name=s.next();
+		System.out.println("enter publication");
+		String publication = s.next();
+		System.out.println("enter author");
+		String author = s.next();
+		
+		BookDAOImpl bookdao = new BookDAOImpl();
+		Book b1 = new Book(isbn, name, publication, author);
+		boolean val= bookdao.addBook(b1);
+		if(val==true) {
+			System.out.println("book added");
+		}
+		else
+		{
+			System.out.println("couldn't add the book");
+		}
+		
+	}
+
+}

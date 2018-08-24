@@ -1,0 +1,36 @@
+package com.dao;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.connections.MyConnection;
+
+public class EmployeeDAO {
+	public List<Employee> findAllEmployees{
+		Connection con = MyConnection.getMyConnection();
+		List<Employee> emps = new ArrayList<>();
+		String select_all = "select * from emp";
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(select_all);
+			while(rs.next()){
+				Employee employee = new Employee();
+				
+				employee.setEmpId(rs.getInt(1));
+				employee.setName(rs.getString(2));
+				employee.setSalary(rs.getInt(3));
+				emps.add(employee);
+				
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return emps;
+	}
+
+}

@@ -1,0 +1,13 @@
+import java.sql.Connection;
+
+import com.connections.MyConnection;
+
+public class LoginDAO {
+	public boolean checkLogin(String username, String password) {
+		boolean success= false;
+		Connection con = MyConnection.getMyConnection();
+		String CHECK_LOGIN = "SELECT USERNAME, PASSWORD FROM LOGIN WHERE USERNAME=? AND PASSWORD=?";
+		return success;
+		
+	}
+}
